@@ -1,0 +1,15 @@
+{
+  "name": "pdfpecker-skills",
+  "owner": { "name": "Moonwalker1307", "url": "https://github.com/Moonwalker1307" },
+  "description": "Skills for making and reading PDFs with PdfPecker: HTML and Markdown to PDF, page previews, text extraction and merging, with no browser.",
+  "plugins": [
+    {
+      "name": "pdfpecker",
+      "source": "./plugins/pdfpecker",
+      "description": "Make PDFs from HTML or Markdown and check them, read PDFs as text or page images, and merge PDFs, with the pdfpecker Python package.",
+      "version": "1.0.0",
+      "category": "documents",
+      "tags": ["pdf", "html-to-pdf", "markdown", "invoice", "report"]
+    }
+  ]
+}
