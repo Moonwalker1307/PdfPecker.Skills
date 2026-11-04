@@ -5,6 +5,7 @@
     python3 pdf.py md    in.md   out.pdf [same options]
     python3 pdf.py preview in.pdf [--dpi 80] [--pages 1-3] [--format png] [--out-dir DIR]
     python3 pdf.py text  in.pdf [--pages 1-2]
+    python3 pdf.py markdown in.pdf [out.md] [--pages 1-2] [--page-comments]
     python3 pdf.py info  in.pdf
     python3 pdf.py merge out.pdf a.pdf b.pdf ...
 
@@ -120,6 +121,16 @@ def cmd_text(a):
     print(pdfpecker.pdf_to_text(a.input, pages=a.pages, timeout=a.timeout))
 
 
+def cmd_markdown(a):
+    markdown = pdfpecker.pdf_to_markdown(a.input, pages=a.pages, page_comments=a.page_comments, timeout=a.timeout)
+    if a.output:
+        with open(a.output, "w", encoding="utf-8", newline="\n") as f:
+            f.write(markdown)
+        print(f"{a.output}: {len(markdown):,} characters")
+    else:
+        sys.stdout.write(markdown)
+
+
 def cmd_info(a):
     with open(a.input, "rb") as f:
         data = f.read()
@@ -149,6 +160,12 @@ def main(argv=None):
     p.add_argument("input")
     p.add_argument("--pages")
     p.add_argument("--timeout", type=float, default=120)
+    p = sub.add_parser("markdown", help="convert any PDF to Markdown: headings, lists and tables in reading order")
+    p.add_argument("input")
+    p.add_argument("output", nargs="?", help="the .md file to write (default: print it)")
+    p.add_argument("--pages")
+    p.add_argument("--page-comments", action="store_true", help="start each page with <!-- page N -->")
+    p.add_argument("--timeout", type=float, default=120)
     p = sub.add_parser("info", help="print the page count")
     p.add_argument("input")
     p = sub.add_parser("merge", help="merge PDFs into one")
@@ -160,7 +177,8 @@ def main(argv=None):
         if a.command in ("html", "md"):
             cmd_convert(a, a.command == "md")
         else:
-            {"preview": cmd_preview, "text": cmd_text, "info": cmd_info, "merge": cmd_merge}[a.command](a)
+            {"preview": cmd_preview, "text": cmd_text, "markdown": cmd_markdown, "info": cmd_info,
+             "merge": cmd_merge}[a.command](a)
     except (pdfpecker.PdfPeckerError, OSError, ValueError) as e:
         sys.stderr.write(f"error: {e}\n")
         return 1

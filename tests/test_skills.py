@@ -101,6 +101,17 @@ def test_preview_markdown_and_merge(tmp_path):
     assert f"{2 * len(paths)} page(s)" in out
 
 
+def test_markdown(tmp_path):
+    (tmp_path / "notes.md").write_text("# Notes\n\n| a | b |\n|---|---|\n| 1 | 2 |\n", encoding="utf-8")
+    assert run("md", "notes.md", "notes.pdf", cwd=tmp_path)[0] == 0
+    code, out, err = run("markdown", "notes.pdf", cwd=tmp_path)
+    assert code == 0, err
+    assert "Notes" in out and "| a | b |" in out and "| 1 | 2 |" in out
+    code, out, err = run("markdown", "notes.pdf", "notes-back.md", "--page-comments", cwd=tmp_path)
+    assert code == 0, err
+    assert (tmp_path / "notes-back.md").read_text(encoding="utf-8").startswith("<!-- page 1 -->")
+
+
 def test_errors_exit_with_one(tmp_path):
     code, _, err = run("text", "missing.pdf", cwd=tmp_path)
     assert code == 1 and "error" in err

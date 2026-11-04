@@ -27,13 +27,15 @@ python3 scripts/pdf.py html invoice.html invoice.pdf          # images and CSS r
 python3 scripts/pdf.py md notes.md notes.pdf --page-size Letter
 python3 scripts/pdf.py preview invoice.pdf --dpi 80           # writes invoice-page-1.png, ... and prints the paths
 python3 scripts/pdf.py text report.pdf --pages 1-2
+python3 scripts/pdf.py markdown report.pdf report.md          # any PDF as Markdown, tables and lists kept
 python3 scripts/pdf.py info report.pdf                        # page count
 python3 scripts/pdf.py merge all.pdf cover.pdf report.pdf
 ```
 
 Run `python3 scripts/pdf.py <command> --help` for every option. From Python, the same calls are
 `pdfpecker.html_to_pdf(html, base_dir=...)`, `html_file_to_pdf(path, out)`, `markdown_to_pdf(text)`,
-`pdf_to_images(pdf, dpi=80)`, `pdf_to_text(pdf)`, `pdf_page_count(pdf)` and `merge_pdfs([...])`.
+`pdf_to_images(pdf, dpi=80)`, `pdf_to_text(pdf)`, `pdf_to_markdown(pdf)`, `pdf_page_count(pdf)`, `merge_pdfs([...])`
+and `pdf_to_pdfa(pdf, "out.pdf")` (an existing PDF to PDF/A for archiving).
 
 ## Writing the HTML
 

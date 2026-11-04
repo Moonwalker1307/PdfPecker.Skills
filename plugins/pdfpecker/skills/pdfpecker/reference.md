@@ -14,6 +14,8 @@ pdfpecker.markdown_file_to_pdf("in.md", "out.pdf")
 images: list[bytes] = pdfpecker.pdf_to_images(pdf, dpi=80, pages="1-3", format="png")   # or "jpeg", "webp"
 text: str = pdfpecker.pdf_to_text(pdf)                       # pages separated by "\f"
 pages: list[str] = pdfpecker.pdf_to_text_pages(pdf)
+md: str = pdfpecker.pdf_to_markdown(pdf, page_comments=True)    # any PDF: headings, lists, tables in reading order
+result = pdfpecker.pdf_to_pdfa(pdf, "archive.pdf", conformance="PDF/A-2u")   # result.changes, result.problems
 count: int = pdfpecker.pdf_page_count(pdf)
 merged: bytes = pdfpecker.merge_pdfs([pdf, "other.pdf"])
 ```
