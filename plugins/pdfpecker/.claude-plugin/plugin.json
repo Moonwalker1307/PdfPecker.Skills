@@ -1,0 +1,10 @@
+{
+  "name": "pdfpecker",
+  "version": "1.0.0",
+  "description": "Make PDFs from HTML or Markdown and check them, read PDFs as text or page images, and merge PDFs, with the pdfpecker Python package.",
+  "author": { "name": "Moonwalker1307", "url": "https://github.com/Moonwalker1307" },
+  "homepage": "https://pdfpecker.net/",
+  "repository": "https://github.com/Moonwalker1307/PdfPecker.Skills",
+  "license": "MIT",
+  "keywords": ["pdf", "html-to-pdf", "markdown-to-pdf", "pdf-to-image", "pdf-to-text"]
+}

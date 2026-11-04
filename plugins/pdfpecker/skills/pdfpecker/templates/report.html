@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Quarterly Report Q3 2026</title>
+<style>
+  /* A multi-page report: a cover page without page numbers, running header and footer, a contents list with page
+     numbers, an SVG chart, KPI cards, and a long table whose header repeats on each page. */
+  @page {
+    size: A4;
+    margin: 22mm 18mm 20mm;
+    @top-left { content: string(chapter); font: 8pt sans-serif; color: #6b7280; }
+    @top-right { content: "Quarterly Report Q3 2026"; font: 8pt sans-serif; color: #6b7280; }
+    @bottom-center { content: counter(page) " / " counter(pages); font: 8pt sans-serif; color: #6b7280; }
+  }
+  @page cover { margin: 0; @top-left { content: none; } @top-right { content: none; } @bottom-center { content: none; } }
+  :root { --accent: #0f766e; --ink: #111827; --muted: #6b7280; --line: #e5e7eb; }
+  body { font-family: serif; font-size: 10.5pt; line-height: 1.5; color: var(--ink); margin: 0; }
+  h1, h2, h3, th, .kpi, .cover, .toc { font-family: sans-serif; }
+  h2 { color: var(--accent); font-size: 16pt; margin: 0 0 4mm; string-set: chapter content(); break-after: avoid; }
+  h2.chapter { break-before: page; }
+  p { text-align: justify; hyphens: auto; margin: 0 0 3mm; }
+
+  .cover { page: cover; height: 297mm; box-sizing: border-box; padding: 60mm 22mm 0; color: white;
+           background: linear-gradient(160deg, #0f766e, #134e4a); }
+  .cover h1 { font-size: 34pt; margin: 0 0 6mm; line-height: 1.1; }
+  .cover .sub { font-size: 14pt; opacity: .85; }
+  .cover .meta { position: absolute; bottom: 25mm; left: 22mm; font-size: 10pt; opacity: .8; }
+
+  .toc { list-style: none; padding: 0; margin: 0 0 8mm; }
+  .toc li { padding: 2mm 0; border-bottom: 1px dotted #9ca3af; }
+  .toc a { color: var(--ink); text-decoration: none; display: flex; justify-content: space-between; }
+  .toc a::after { content: target-counter(attr(href), page); }
+
+  .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5mm; margin: 5mm 0 7mm; }
+  .kpi { border: 1px solid var(--line); border-radius: 6px; padding: 4mm; break-inside: avoid; }
+  .kpi .value { font-size: 18pt; font-weight: bold; color: var(--accent); }
+  .kpi .name { font-size: 8pt; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
+  .kpi .delta { font-size: 8.5pt; color: #15803d; }
+
+  figure { margin: 4mm 0 6mm; break-inside: avoid; }
+  figcaption { font: 8.5pt sans-serif; color: var(--muted); margin-top: 2mm; }
+
+  table { width: 100%; border-collapse: collapse; font: 9pt sans-serif; }
+  thead th { background: #f3f4f6; text-align: left; padding: 2mm; border-bottom: 1.5px solid var(--accent); }
+  td { padding: 1.6mm 2mm; border-bottom: 1px solid var(--line); }
+  tr { break-inside: avoid; }
+  tbody tr:nth-child(even) td { background: #fafafa; }
+  .num { text-align: right; }
+</style>
+</head>
+<body>
+  <section class="cover">
+    <h1>Quarterly Report<br>Q3 2026</h1>
+    <div class="sub">Operations, sales and outlook</div>
+    <div class="meta">Example Company · Prepared 4 November 2026</div>
+  </section>
+
+  <h2 id="contents">Contents</h2>
+  <ul class="toc">
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#sales">Sales by region</a></li>
+    <li><a href="#orders">Order details</a></li>
+  </ul>
+
+  <h2 id="summary">Summary</h2>
+  <p>Revenue grew in every region this quarter, led by the north, while costs stayed flat. Replace this text with
+  your own: the layout keeps headings with the paragraph after them, justifies and hyphenates the text, and moves
+  cards, figures and table rows to the next page whole rather than splitting them.</p>
+  <div class="kpis">
+    <div class="kpi"><div class="name">Revenue</div><div class="value">€4.2M</div><div class="delta">+12% on Q2</div></div>
+    <div class="kpi"><div class="name">Orders</div><div class="value">18,430</div><div class="delta">+8% on Q2</div></div>
+    <div class="kpi"><div class="name">Margin</div><div class="value">31.5%</div><div class="delta">+1.2 points</div></div>
+  </div>
+
+  <h2 id="sales" class="chapter">Sales by region</h2>
+  <p>The chart is inline SVG, so it needs no script: compute bar heights before writing the HTML.</p>
+  <figure>
+    <svg width="100%" viewBox="0 0 520 220" font-family="sans-serif" font-size="11">
+      <line x1="40" y1="190" x2="510" y2="190" stroke="#9ca3af"/>
+      <g fill="#0f766e">
+        <rect x="70" y="50" width="70" height="140" rx="3"/>
+        <rect x="185" y="80" width="70" height="110" rx="3"/>
+        <rect x="300" y="105" width="70" height="85" rx="3"/>
+        <rect x="415" y="130" width="70" height="60" rx="3"/>
+      </g>
+      <g text-anchor="middle" fill="#111827">
+        <text x="105" y="44">1.45M</text><text x="220" y="74">1.14M</text><text x="335" y="99">0.88M</text><text x="450" y="124">0.62M</text>
+        <text x="105" y="207">North</text><text x="220" y="207">West</text><text x="335" y="207">South</text><text x="450" y="207">East</text>
+      </g>
+    </svg>
+    <figcaption>Figure 1. Revenue by region, Q3 2026, in euros.</figcaption>
+  </figure>
+  <p>North grew fastest after the new distribution centre opened in July; the east region is the one to watch.</p>
+
+  <h2 id="orders" class="chapter">Order details</h2>
+  <table>
+    <thead><tr><th>Order</th><th>Customer</th><th>Region</th><th class="num">Items</th><th class="num">Amount (€)</th></tr></thead>
+    <tbody>
+      <tr><td>Q3-1001</td><td>Customer A</td><td>North</td><td class="num">12</td><td class="num">1,240.00</td></tr>
+      <tr><td>Q3-1002</td><td>Customer B</td><td>West</td><td class="num">4</td><td class="num">380.50</td></tr>
+      <tr><td>Q3-1003</td><td>Customer C</td><td>South</td><td class="num">27</td><td class="num">2,915.00</td></tr>
+      <tr><td>Q3-1004</td><td>Customer D</td><td>East</td><td class="num">9</td><td class="num">812.75</td></tr>
+      <!-- Add as many rows as you need: the header repeats on every page. -->
+    </tbody>
+  </table>
+</body>
+</html>
