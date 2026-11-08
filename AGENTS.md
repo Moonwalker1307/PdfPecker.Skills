@@ -30,6 +30,8 @@ as a Claude Code plugin marketplace. The same skill folders are zipped for Claud
   `scripts/pdf.py`, `templates/`).
 - `tests/test_skills.py` – frontmatter, manifest and link checks, and end-to-end runs of the scripts.
 - `tools/package.py` – zips each skill folder; CI attaches the zips to each release.
+- `.github/workflows/vulnerability-scan.yml` – a daily OSV-Scanner run on what `pip install pdfpecker` installs, with
+  results in Security → Code scanning.
 
 ## Build and verify
 
